@@ -1,3 +1,6 @@
+package Characters;
+
+
 public class Guerrero extends Personajes {
 
     public Guerrero(double vida, double mana, String nombre,int armadura,String nombreclase) {
@@ -7,6 +10,17 @@ public class Guerrero extends Personajes {
     public int valorAtaque=5;
     public double ataque=valorAtaque;
 
+    public void setVida(double vidaRestante){
+        this.vida=vidaRestante;
+    }
+
+    public void setMana(double manaRestante){
+        this.mana=manaRestante;
+    }
+
+    public void setArmor(int nArmorValue){
+        this.armadura=nArmorValue;
+    }
 
     @Override
     public double ataque(){

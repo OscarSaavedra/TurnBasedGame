@@ -1,3 +1,5 @@
+package Characters;
+
 public abstract class Personajes {
     protected String nombre;
     protected double vida;
@@ -7,12 +9,22 @@ public abstract class Personajes {
     protected double ataque;
     protected String menu;
 
-    public Personajes(double vida, double mana, String nombre,int armadura,String nombreclase){
+    public Personajes(double vida,double mana, String nombre,int armadura,String nombreclase){
         this.vida=vida;
         this.mana=mana;
         this.nombre=nombre;
         this.armadura=armadura;
         this.nombreclase=nombreclase;
+    }
+
+    public void setVida(double restedLife){
+        this.vida=restedLife;
+    }
+    public void setMana(double manaRestante){
+        mana=manaRestante;
+    }
+    public void setArmor(int nArmorValue){
+        this.armadura=nArmorValue;
     }
 
     public String getNombre(){
@@ -30,6 +42,8 @@ public abstract class Personajes {
     public String devolverClase(){
         return nombreclase;
     }
+
+
 
     public double ataque(){
         return ataque;

@@ -1,16 +1,14 @@
 package Characters;
 
-import Characters.Personajes;
-
 public class Mago extends Personajes {
 
     public Mago(double vida, double mana, String nombre,int armadura,String nombreclase) {
         super (vida,mana,nombre,armadura,nombreclase);
     }
 
-    public int valorAtaque=8;
-    public int numeroaleatorio=(int)(Math.random()*2+1);
-    public double ataque=(valorAtaque*numeroaleatorio);
+    private int valorAtaque=8;
+    private int numeroaleatorio=(int)(Math.random()*2+1);
+    private double ataque=(valorAtaque*numeroaleatorio);
 
     public void setMana(double manaRestante){
         this.mana=manaRestante;
@@ -35,5 +33,10 @@ public class Mago extends Personajes {
     @Override
     public String devolverMenu(){
         return menu;
+    }
+
+    @Override
+    public String toString() {
+        return "Mago{"+nombre+"}";
     }
 }

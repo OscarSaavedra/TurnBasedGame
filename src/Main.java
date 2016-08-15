@@ -6,6 +6,9 @@ import Characters.Arquero;
 import Characters.Guerrero;
 import Characters.Mago;
 import Characters.Personajes;
+import ItemsPackage.Item;
+import ItemsPackage.Shield;
+import ItemsPackage.ShieldItems;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -16,8 +19,7 @@ public class Main{
     private static final String green = "\u001B[32m";
     private static final String negrita = "\033[0;1m";
 
-    public static Multimap<String,List<Personajes>>multimapContrinc= ArrayListMultimap.create();
-
+    private static Multimap<Personajes,List<Item>>personajesConItems=ArrayListMultimap.create();
     public static void main(String[] args) {
 
 
@@ -44,6 +46,15 @@ public class Main{
         int i=0; //1 muestra el daño bloqueado, 0 no lo muestra
         while (bucle) {
             for (Personajes contrincantes : listaPersonajes) {
+                /*Shield shield1= ShieldItems.createShield1();
+                Shield shield2=ShieldItems.createShield2();
+                Shield shield3=ShieldItems.createShield3();
+                List<Item>items=new ArrayList<>();
+                items.add(shield1);
+                items.add(shield2);
+                items.add(shield3);
+                personajesConItems.put(contrincantes,items);
+                System.out.println(personajesConItems.toString());*/
                 proteccionArmadura=(ataqueRecibido*contrincantes.getArmadura()/100);
 
                 System.out.println(negrita+"Turno del " + contrincantes.devolverClase()
@@ -200,6 +211,7 @@ public class Main{
                         listaPersonajes.add(mago);
                 }
             }
+
             System.out.println("¿Quieres crear mas personajes? Si--No" );
             String confString = sc.next();
             if (confString.equals("no")) {

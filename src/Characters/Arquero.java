@@ -20,8 +20,8 @@ public class Arquero extends Personajes {
         this.armadura=nArmorValue;
     }
 
-    public int valorAtaque=2;
-    public double ataque=(valorAtaque*(int)(Math.random()*15+1));
+    private int valorAtaque=2;
+    private double ataque=(valorAtaque*(int)(Math.random()*15+1));
 
     @Override
     public double ataque(){
@@ -29,11 +29,16 @@ public class Arquero extends Personajes {
     }
 
 
-    public String menu= "[1]Atacar\n" +
+    private String menu= "[1]Atacar\n" +
             "[2]El próximo ataque que recibas tiene un 50% de fallar\n" +
             "[3]Pasar turno (recuperas el 40% de salud)";
     @Override
     public String devolverMenu(){
         return menu;
+    }
+
+    @Override
+    public String toString() {
+        return "Arquero{"+nombre+"}";
     }
 }

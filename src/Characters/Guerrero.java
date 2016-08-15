@@ -7,8 +7,8 @@ public class Guerrero extends Personajes {
         super (vida,mana,nombre,armadura,nombreclase);
     }
 
-    public int valorAtaque=5;
-    public double ataque=valorAtaque;
+    private int valorAtaque=5;
+    private double ataque=valorAtaque;
 
     public void setVida(double vidaRestante){
         this.vida=vidaRestante;
@@ -32,12 +32,17 @@ public class Guerrero extends Personajes {
 
 
 
-    public String menu= "[1]Atacar\n" +
+    private String menu= "[1]Atacar\n" +
             "[2]Escudarse, la armadura aumenta 20 puntos\n" +
             "[3]Pasar turno (recuperas el 30% de salud)";
     @Override
     public String devolverMenu(){
         return menu;
+    }
+
+    @Override
+    public String toString() {
+        return "Guerrero{"+nombre+"}";
     }
 
     public double getVida(){

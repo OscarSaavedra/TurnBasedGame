@@ -36,9 +36,12 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return "Item{"+itemName +"}" +
-                ", Bonus ataque=" + addAttack +
-                ", Bonus defensa=" + addDefense +
-                ", Bonus vida=" + addLife +'}';
+        if (this instanceof Sword ){
+            return "Espada{"+itemName +"}, Bonus ataque=" + addAttack +'}';
+        }else if(this instanceof Shield){
+            return "Escudo {"+itemName +"}, Bonus defensa=" + addDefense +
+                    ", Bonus vida=" + addLife +'}';
+        }
+        return "";
     }
 }

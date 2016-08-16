@@ -31,7 +31,8 @@ public class Arquero extends Personajes {
 
     private String menu= "[1]Atacar\n" +
             "[2]El próximo ataque que recibas tiene un 50% de fallar\n" +
-            "[3]Pasar turno (recuperas el 40% de salud)";
+            "[3]Pasar turno (recuperas el 40% de salud)\n"+
+            "[4]Abrir inventario.";
     @Override
     public String devolverMenu(){
         return menu;
@@ -39,6 +40,6 @@ public class Arquero extends Personajes {
 
     @Override
     public String toString() {
-        return "Arquero{"+nombre+"}";
+        return "Arquero {"+nombre+"}";
     }
 }

@@ -34,7 +34,8 @@ public class Guerrero extends Personajes {
 
     private String menu= "[1]Atacar\n" +
             "[2]Escudarse, la armadura aumenta 20 puntos\n" +
-            "[3]Pasar turno (recuperas el 30% de salud)";
+            "[3]Pasar turno (recuperas el 30% de salud)\n"+
+            "[4]Abrir inventario.";
     @Override
     public String devolverMenu(){
         return menu;
@@ -42,7 +43,7 @@ public class Guerrero extends Personajes {
 
     @Override
     public String toString() {
-        return "Guerrero{"+nombre+"}";
+        return "Guerrero {"+nombre+"}";
     }
 
     public double getVida(){

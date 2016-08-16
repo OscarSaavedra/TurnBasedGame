@@ -29,7 +29,8 @@ public class Mago extends Personajes {
 
     public String menu="[1]Atacar\n" +
             "[2]Tu ataque hace un 50% menos de daño pero te cura un 50% (coste 50mp)\n" +
-            "[3]Pasar turno (recuperas el 25% de salud)";
+            "[3]Pasar turno (recuperas el 25% de salud)\n"+
+            "[4]Abrir inventario.";
     @Override
     public String devolverMenu(){
         return menu;
@@ -37,6 +38,6 @@ public class Mago extends Personajes {
 
     @Override
     public String toString() {
-        return "Mago{"+nombre+"}";
+        return "Mago {"+nombre+"}";
     }
 }

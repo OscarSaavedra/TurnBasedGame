@@ -6,9 +6,7 @@ import Characters.Arquero;
 import Characters.Guerrero;
 import Characters.Mago;
 import Characters.Personajes;
-import ItemsPackage.Item;
-import ItemsPackage.Shield;
-import ItemsPackage.ShieldItems;
+import ItemsPackage.*;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -19,24 +17,80 @@ public class Main{
     private static final String green = "\u001B[32m";
     private static final String negrita = "\033[0;1m";
 
-    private static Multimap<Personajes,List<Item>>personajesConItems=ArrayListMultimap.create();
     public static void main(String[] args) {
 
 
         Scanner sc = new Scanner(System.in);
 
         List<Personajes> listaPersonajes = new ArrayList<>();
+        Multimap<Personajes,List<Item>>pj1items=ArrayListMultimap.create();
+        Multimap<Personajes,List<Item>>pj2items=ArrayListMultimap.create();
+        List<Item>pj1itemList=new ArrayList<>();
+        List<Item>pj2itemList=new ArrayList<>();
+
 
         System.out.println("Cuantos personajes quieres crear? (introduce 2 para 1vs1)");
         int cantidadPJ = sc.nextInt();
         crearPersonajes(sc, listaPersonajes, cantidadPJ);
 
+        int contPJ=0;//para diferenciar el personaje cero del siguiente
+        for (Personajes personajes:listaPersonajes ) {
+            System.out.println(personajes.devolverClase()+" "+personajes.getNombre()+" elige uno de estos dos items");
+            System.out.println("1-Espada1,escudo2");
+            System.out.println("2-Escudo1,espada2");
+            int eleccion=sc.nextInt();
+            switch (eleccion){
+                case 1:
+                    if (contPJ==0){
+                        Sword sword1=SwordItems.createSword1();
+                        Shield shield2=ShieldItems.createShield2();
+                        pj1itemList.add(sword1);
+                        pj1itemList.add(shield2);
+                        pj1items.put(personajes,pj1itemList);
+                        contPJ++;
+                        break;
+                    }else{
+                        Sword sword1=SwordItems.createSword1();
+                        Shield shield2=ShieldItems.createShield2();
+                        pj2itemList.add(sword1);
+                        pj2itemList.add(shield2);
+                        pj2items.put(personajes,pj2itemList);
+                        break;
+                    }
+                case 2:
+                    if (contPJ==0){
+                        Sword sword2=SwordItems.createSword2();
+                        Shield shield1=ShieldItems.createShield1();
+                        pj1itemList.add(sword2);
+                        pj1itemList.add(shield1);
+                        pj1items.put(personajes,pj1itemList);
+                        contPJ++;
+                        break;
+                    }else{
+                        Sword sword2=SwordItems.createSword2();
+                        Shield shield1=ShieldItems.createShield1();
+                        pj2itemList.add(sword2);
+                        pj2itemList.add(shield1);
+                        pj2items.put(personajes,pj2itemList);
+                        break;
+                    }
+            }
+
+        }
+        int contPJ2=0;
         for (Personajes personajes : listaPersonajes) {
             System.out.println("  " + personajes.devolverClase() + " " + personajes.getNombre());
             System.out.println(red+"[HP]: " + personajes.getVida()+reset);
             System.out.println(blue+"[MP]: " + personajes.getMana()+reset);
             System.out.println(green+"[DEF]: " + personajes.getArmadura()+reset);
-            System.out.println("  ");
+
+            if (contPJ2==0){
+                System.out.println("Items: "+pj1items);
+                contPJ2++;
+                System.out.println("  ");
+            }else{
+                System.out.println("Items: "+pj2items);
+            }
         }
 
 
@@ -46,15 +100,6 @@ public class Main{
         int i=0; //1 muestra el daño bloqueado, 0 no lo muestra
         while (bucle) {
             for (Personajes contrincantes : listaPersonajes) {
-                /*Shield shield1= ShieldItems.createShield1();
-                Shield shield2=ShieldItems.createShield2();
-                Shield shield3=ShieldItems.createShield3();
-                List<Item>items=new ArrayList<>();
-                items.add(shield1);
-                items.add(shield2);
-                items.add(shield3);
-                personajesConItems.put(contrincantes,items);
-                System.out.println(personajesConItems.toString());*/
                 proteccionArmadura=(ataqueRecibido*contrincantes.getArmadura()/100);
 
                 System.out.println(negrita+"Turno del " + contrincantes.devolverClase()

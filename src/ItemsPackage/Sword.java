@@ -2,8 +2,8 @@ package ItemsPackage;
 
 public class Sword extends Item{
 
-    public Sword(String itemName,int addAttack){
-        super(itemName);
+    public Sword(String itemName,int price,int addAttack){
+        super(itemName,price);
         this.addAttack=addAttack;
     }
 
@@ -12,5 +12,8 @@ public class Sword extends Item{
     }
     public void setAddAttack(int addAttack) {
         this.addAttack = addAttack;
+    }
+    public int getPrice() {
+        return price;
     }
 }

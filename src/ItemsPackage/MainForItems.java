@@ -8,8 +8,8 @@ public class MainForItems {
     /////////////////////////////////////////////
     public static void main(String args[]){
         ArrayList<Item>listaItems=new ArrayList<>();
-        Sword espada1=new Sword("Espada1",10);
-        Shield escudo1=new Shield("Escudo1",15,20);
+        Sword espada1=new Sword("Espada1",10,10);
+        Shield escudo1=new Shield("Escudo1",15,20,10);
         listaItems.add(espada1);
         listaItems.add(escudo1);
         for (Item lista:listaItems) {

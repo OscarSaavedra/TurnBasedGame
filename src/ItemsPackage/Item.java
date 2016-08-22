@@ -2,13 +2,24 @@ package ItemsPackage;
 
 public abstract class Item {
     protected String itemName;
+    protected int price;
     protected int addAttack;
     protected int addDefense;
     protected int addLife;
+    protected int lifeRestored;
+    protected int manaRestored;
 
 
-    public Item(String itemName) {
+    public Item(String itemName,int price) {
         this.itemName=itemName;
+        this.price=price;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getAddAttack() {
@@ -32,15 +43,32 @@ public abstract class Item {
         this.addLife = addLife;
     }
 
+    public int getLifeRestored() {
+        return lifeRestored;
+    }
+    public void setLifeRestored(int lifeRestored) {
+        this.lifeRestored = lifeRestored;
+    }
+
+    public int getManaRestored() {
+        return manaRestored;
+    }
+    public void setManaRestored(int manaRestored) {
+        this.manaRestored = manaRestored;
+    }
+
 
 
     @Override
     public String toString() {
         if (this instanceof Sword ){
-            return "Espada{"+itemName +"}, Bonus ataque=" + addAttack +'}';
+            return "Espada{"+itemName +"}, Bonus ataque="+addAttack+", Precio="+price;
         }else if(this instanceof Shield){
-            return "Escudo {"+itemName +"}, Bonus defensa=" + addDefense +
-                    ", Bonus vida=" + addLife +'}';
+            return "Escudo {"+itemName +"}, Bonus defensa="+addDefense+
+                    ", Bonus vida="+addLife+", Precio="+price;
+        }else if(this instanceof Potions){
+            return "Poción{"+itemName+"}, Vida restaurada="+lifeRestored+
+                    ", Maná restaurado="+manaRestored+", Precio="+price;
         }
         return "";
     }

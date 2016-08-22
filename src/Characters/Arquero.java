@@ -1,6 +1,6 @@
 package Characters;
 
-import Characters.Personajes;
+
 
 public class Arquero extends Personajes {
 
@@ -11,7 +11,6 @@ public class Arquero extends Personajes {
     public void setVida(double vidaRestante){
         this.vida=vidaRestante;
     }
-
     public void setMana(double manaRestante){
         this.mana=manaRestante;
     }
@@ -22,23 +21,25 @@ public class Arquero extends Personajes {
 
     private int valorAtaque=2;
     private double ataque=(valorAtaque*(int)(Math.random()*15+1));
-
-    @Override
-    public double ataque(){
-        return ataque;
-    }
-
-
+    private int money=100;
     private String menu= "[1]Atacar\n" +
             "[2]El próximo ataque que recibas tiene un 50% de fallar\n" +
             "[3]Pasar turno (recuperas el 40% de salud)\n"+
             "[4]Abrir inventario.";
-    @Override
+
+    public double ataque(){
+        return ataque;
+    }
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
     public String devolverMenu(){
         return menu;
     }
 
-    @Override
     public String toString() {
         return "Arquero {"+nombre+"}";
     }

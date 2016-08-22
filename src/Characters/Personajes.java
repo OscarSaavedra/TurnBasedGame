@@ -8,6 +8,7 @@ public abstract class Personajes {
     protected String nombreclase;
     protected double ataque;
     protected String menu;
+    protected int money;
 
     public Personajes(double vida,double mana, String nombre,int armadura,String nombreclase){
         this.vida=vida;
@@ -43,11 +44,17 @@ public abstract class Personajes {
         return nombreclase;
     }
 
-
-
     public double ataque(){
         return ataque;
     }
+
+    public int getMoney() {
+        return money;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public String devolverMenu(){
         return menu;
     }

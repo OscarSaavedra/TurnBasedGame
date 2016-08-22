@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,9 +8,7 @@ import Characters.Guerrero;
 import Characters.Mago;
 import Characters.Personajes;
 import ItemsPackage.*;
-import MathEngine.Battle;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 
 public class Main{
@@ -20,17 +19,17 @@ public class Main{
     private static final String negrita = "\033[0;1m";
     private static final Multimap<Personajes,List<Item>> pjItems =ArrayListMultimap.create();
     private static final List<Personajes> listaPersonajes = new ArrayList<>();
+    private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        crearPersonajes(sc);
-        bloqueAñadirItems(sc);
+        crearPersonajes();
+        int contPJ=1;
+        shop(contPJ);
         resumen();
-        battle(sc);
+        battle();
     }
 
-    private static void crearPersonajes(Scanner sc) {
+    private static void crearPersonajes() {
         double vida,mana;
         int armadura,i;
         String nombre;
@@ -67,7 +66,7 @@ public class Main{
                         do{System.out.println("Introduce la vida [de 1 a 175]");
                             vida = sc.nextDouble();}while (vida<1||vida>175);
                         do{System.out.println("Introduce el mana [de 1 a "+(175-vida)+"]");
-                            mana = sc.nextDouble();}while (mana<1||mana>175-vida);
+                            mana = sc.nextDouble();}while (mana<0||mana>175-vida);
                         System.out.println("Introduce el nombre");
                         nombre = sc.next();
                         do{System.out.println("Introduce el valor de armadura [de 1 a 10]");
@@ -103,45 +102,195 @@ public class Main{
             }
         }
     }
-    private static void bloqueAñadirItems(Scanner sc) {
-        int contPJ=0;//para diferenciar el personaje cero del siguiente
+
+    static final List<Item>itemspl1=new ArrayList<>();
+    static final List<Item>itemspl2=new ArrayList<>();
+    private static void shop(int contPJ) {
         for (Personajes personajes:listaPersonajes ) {
-            System.out.println(personajes.devolverClase()+" "+personajes.getNombre()+" elige uno de estos dos items");
-            System.out.println("1-Espada1,escudo2");
-            System.out.println("2-Escudo1,espada2");
+            if(personajes.getMoney()>=0){
+
+            Shop.shopMenuTitle();
+            System.out.print(personajes.devolverClase()+" "+personajes.getNombre()+" elige");
+            System.out.println(" (dinero actual "+personajes.getMoney());
+            Shop.shopMenuOptions();
+
             int eleccion=sc.nextInt();
-            switch (eleccion){
-                case 1:
-                    if (contPJ==0){
-                        Sword sword1= SwordItems.createSword1();
-                        Shield shield2= ShieldItems.createShield2();
-                        List<Item>items=AddItemToPlayer.createItemList(sword1,shield2);
-                        pjItems.put(personajes,items);
-                        contPJ++;
-                        break;
-                    }else{
-                        Sword sword1=SwordItems.createSword1();
-                        Shield shield2=ShieldItems.createShield2();
-                        List<Item>items=AddItemToPlayer.createItemList(sword1,shield2);
-                        pjItems.put(personajes,items);
-                        break;
+                if (!pjItems.containsKey(personajes)){
+                    pjItems.put(personajes,itemspl1);
+                }
+
+                    switch (eleccion){
+                        case 1:
+                            Shop.weaponShop();
+                            int ans=sc.nextInt();
+                            switch (ans){
+                                case 1:
+                                    if (contPJ==1){
+                                        Sword sword1=SwordItems.createSword1();
+                                        itemspl1.add(sword1);
+                                        personajes.setMoney(personajes.getMoney()-sword1.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 2:
+                                    if (contPJ==1){
+                                        Sword sword2=SwordItems.createSword2();
+                                        itemspl1.add(sword2);
+                                        personajes.setMoney(personajes.getMoney()-sword2.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+
+                                case 3:
+                                    if (contPJ==1){
+                                        Sword sword3=SwordItems.createSword3();
+                                        itemspl1.add(sword3);
+                                        personajes.setMoney(personajes.getMoney()-sword3.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 4:
+                                    if (contPJ==1){
+                                        Sword sword4=SwordItems.createSword4();
+                                        itemspl1.add(sword4);
+                                        personajes.setMoney(personajes.getMoney()-sword4.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 5:
+                                    shop(1);
+                                    break;
+                            }
+
+                        case 2:
+                            Shop.armorShop();
+                            int ans2=sc.nextInt();
+                            switch (ans2){
+                                case 1:
+                                    if (contPJ==1){
+                                        itemspl1.add(ShieldItems.createShield1());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 2:
+                                    if (contPJ==1){
+                                        itemspl1.add(ShieldItems.createShield2());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 3:
+                                    if (contPJ==1){
+                                        itemspl1.add(ShieldItems.createShield3());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 4:
+                                    if (contPJ==1){
+                                        itemspl1.add(ShieldItems.createShield4());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 5:
+                                    shop(1);
+                                    break;
+
+                            }
+
+                        case 3:
+                            Shop.potionShop();
+                            int ans3=sc.nextInt();
+                            switch (ans3){
+                                case 1:
+                                    if (contPJ==1){
+                                        Potions hpPotion1=PotionItems.createHPpotion1();
+                                        itemspl1.add(hpPotion1);
+                                        personajes.setMoney(personajes.getMoney()-hpPotion1.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 2:
+                                    if (contPJ==1){
+                                        Potions hpPotion2=PotionItems.createHPpotion2();
+                                        itemspl1.add(hpPotion2);
+                                        personajes.setMoney(personajes.getMoney()-hpPotion2.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 3:
+                                    if (contPJ==1){
+                                        Potions mpPotion1=PotionItems.createMPpotion1();
+                                        itemspl1.add(mpPotion1);
+                                        personajes.setMoney(personajes.getMoney()-mpPotion1.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+
+                                case 4:
+                                    if (contPJ==1){
+                                        Potions mppotion2=PotionItems.createMPpotion2();
+                                        itemspl1.add(mppotion2);
+                                        personajes.setMoney(personajes.getMoney()-mppotion2.getPrice());
+                                        if (personajes.getMoney()>0){
+                                            shop(1);
+                                        }else {
+                                            break;
+                                        }
+                                    }
+
+                                case 5:
+                                    shop(1);
+                                    break;
+                            }
+
                     }
-                case 2:
-                    if (contPJ==0){
-                        Sword sword2=SwordItems.createSword2();
-                        Shield shield1=ShieldItems.createShield1();
-                        List<Item>item=AddItemToPlayer.createItemList(sword2,shield1);
-                        pjItems.put(personajes,item);
-                        contPJ++;
-                        break;
-                    }else{
-                        Sword sword2=SwordItems.createSword2();
-                        Shield shield1=ShieldItems.createShield1();
-                        List<Item>item=AddItemToPlayer.createItemList(sword2,shield1);
-                        pjItems.put(personajes,item);
-                        break;
-                    }
-            }
+                }else{
+                    System.out.println("Gastaste tu dinero");
+                    break;
+                }
 
         }
     }
@@ -163,7 +312,7 @@ public class Main{
             System.out.println("-----------------------------");
         }
     }
-    private static void battle(Scanner sc) {
+    private static void battle() {
         int i=0; //1 muestra el daño bloqueado, 0 no lo muestra
         boolean bucle=true;
         double proteccionArmadura;
@@ -264,7 +413,7 @@ public class Main{
                             System.out.println("Cerrar inventario?");
                             String s=sc.next();
                             if (s.equals("si")){
-                                battle(sc);
+                                battle();
                             }else{
                                 break;
                             }
@@ -274,7 +423,5 @@ public class Main{
                 }
             }
         }
-
-
 }
 

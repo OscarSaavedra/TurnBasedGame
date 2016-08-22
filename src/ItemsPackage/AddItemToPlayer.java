@@ -10,13 +10,8 @@ import java.util.List;
 
 public class AddItemToPlayer {
     public static List<Item>createItemList(Item...args){
-        int i=0;
-        Item[] items=new Item[args.length];
-        for (Item list:args) {
-            items[i]=list;
-            i++;
-        }
-        List<Item>itemList=new ArrayList<Item>(Arrays.asList(items));
+
+        List<Item>itemList=new ArrayList<>(Arrays.asList(args));
         return itemList;
     }
     public static Multimap<Personajes,List<Item>> addItemToPlayer1(Personajes pj1,List<Item>listpj1){

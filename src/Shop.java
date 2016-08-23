@@ -13,6 +13,7 @@ public class Shop {
         System.out.println("[1]Armas");
         System.out.println("[2]Armaduras");
         System.out.println("[3]Pociones");
+        System.out.println("[4]Salir");
 
     }
     public static void weaponShop(){

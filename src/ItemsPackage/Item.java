@@ -1,5 +1,7 @@
 package ItemsPackage;
 
+import java.util.Comparator;
+
 public abstract class Item {
     protected String itemName;
     protected int price;
@@ -14,7 +16,11 @@ public abstract class Item {
         this.itemName=itemName;
         this.price=price;
     }
-    
+
+    public String getItemName() {
+        return itemName;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -72,4 +78,23 @@ public abstract class Item {
         }
         return "";
     }
+
+    public static class ComparatorByPrice implements Comparator<Item> {
+        public int compare(Item i1,Item i2){
+            if (i1.getPrice()>i2.getPrice()){
+                return 1;
+            }else if (i1.getPrice()==i2.getPrice()){
+                return 0;
+            }
+            else return -1;
+        }
+    }
+
+    public static class ComparatorByName implements Comparator<Item>{
+        public int compare (Item i1,Item i2){
+            return i1.getItemName().compareTo(i2.getItemName());
+        }
+    }
 }
+
+

@@ -55,6 +55,16 @@ public abstract class Personajes {
         this.money = money;
     }
 
+    public boolean enoughMoney(int playerMoney, int itemPrice){
+        boolean enough=true;
+        if (playerMoney>itemPrice||playerMoney==itemPrice){
+            enough=true;
+        }else if (playerMoney<itemPrice){
+            enough=false;
+        }
+        return enough;
+    }
+
     public String devolverMenu(){
         return menu;
     }

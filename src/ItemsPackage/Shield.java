@@ -1,5 +1,7 @@
 package ItemsPackage;
 
+import java.util.Comparator;
+
 public class Shield extends Item {
 
     protected Shield(String itemName,int price, int addDefense, int addLife) {

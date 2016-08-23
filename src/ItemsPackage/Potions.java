@@ -1,6 +1,8 @@
 package ItemsPackage;
 
-public class Potions extends Item {
+import java.util.Comparator;
+
+public class Potions extends Item{
 
     protected Potions (String itemName, int price, int lifeRestored,int manaRestored){
         super(itemName,price);
@@ -29,7 +31,5 @@ public class Potions extends Item {
     public int getPrice() {
         return price;
     }
-
-
 }
 

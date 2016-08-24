@@ -1,6 +1,5 @@
 package ItemsPackage;
 
-import java.util.Comparator;
 
 public class Shield extends Item {
 

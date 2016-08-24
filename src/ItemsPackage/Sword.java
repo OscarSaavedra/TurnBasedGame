@@ -1,7 +1,5 @@
 package ItemsPackage;
 
-import java.util.Comparator;
-
 public class Sword extends Item{
 
     public Sword(String itemName,int price,int addAttack){

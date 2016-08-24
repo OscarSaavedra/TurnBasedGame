@@ -120,194 +120,58 @@ public class Main{
                 if (!pjItems.containsKey(personajes)){
                     pjItems.put(personajes,itemspl1);
                 }
-
                     switch (eleccion){
                         case 1:
                             Shop.weaponShop();
                             int ans=sc.nextInt();
-                            switch (ans){
-                                case 1:
-                                    if (contPJ==1){
-                                        Sword sword1=SwordItems.createSword1();
-                                        if (personajes.enoughMoney(personajes.getMoney(),sword1.getPrice())){
-                                            itemspl1.add(sword1);
-                                            personajes.setMoney(personajes.getMoney()-sword1.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+sword1.getItemName());
-                                        }
-
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 2:
-                                    if (contPJ==1){
-                                        Sword sword2=SwordItems.createSword2();
-                                        if (personajes.enoughMoney(personajes.getMoney(),sword2.getPrice())){
-                                            itemspl1.add(sword2);
-                                            personajes.setMoney(personajes.getMoney()-sword2.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+sword2.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-
-                                case 3:
-                                    if (contPJ==1){
-                                        Sword sword3=SwordItems.createSword3();
-                                        if (personajes.enoughMoney(personajes.getMoney(),sword3.getPrice())){
-                                            itemspl1.add(sword3);
-                                            personajes.setMoney(personajes.getMoney()-sword3.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+sword3.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 4:
-                                    if (contPJ==1){
-                                        Sword sword4=SwordItems.createSword4();
-                                        if (personajes.enoughMoney(personajes.getMoney(),sword4.getPrice())){
-                                            itemspl1.add(sword4);
-                                            personajes.setMoney(personajes.getMoney()-sword4.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+sword4.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 5:
-                                    shop(1);
-                                    break;
+                            Sword sword=SwordItems.swordList(ans);
+                            if (personajes.enoughMoney(personajes.getMoney(),sword.getPrice())){
+                                itemspl1.add(sword);
+                                personajes.setMoney(personajes.getMoney()-sword.getPrice());
+                            }else{
+                                System.out.println("Dinero insuficiente para "+sword.getItemName());
                             }
+                            if (ans==7){
+                                shop(1);
+                                break;
+                            }
+                            shop(1);
+                            break;
 
                         case 2:
                             Shop.armorShop();
                             int ans2=sc.nextInt();
-                            switch (ans2){
-                                case 1:
-                                    if (contPJ==1){
-                                        Shield shield1=ShieldItems.createShield1();
-                                        if (personajes.enoughMoney(personajes.getMoney(),shield1.getPrice())){
-                                            itemspl1.add(shield1);
-                                            personajes.setMoney(personajes.getMoney()-shield1.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+shield1.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 2:
-                                    if (contPJ==1){
-                                        Shield shield2=ShieldItems.createShield2();
-                                        if (personajes.enoughMoney(personajes.getMoney(),shield2.getPrice())){
-                                            itemspl1.add(shield2);
-                                            personajes.setMoney(personajes.getMoney()-shield2.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+shield2.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 3:
-                                    if (contPJ==1){
-                                        Shield shield3=ShieldItems.createShield3();
-                                        if (personajes.enoughMoney(personajes.getMoney(),shield3.getPrice())){
-                                            itemspl1.add(shield3);
-                                            personajes.setMoney(personajes.getMoney()-shield3.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+shield3.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 4:
-                                    if (contPJ==1){
-                                    Shield shield4=ShieldItems.createShield4();
-                                    if (personajes.enoughMoney(personajes.getMoney(),shield4.getPrice())){
-                                        itemspl1.add(shield4);
-                                        personajes.setMoney(personajes.getMoney()-shield4.getPrice());
-                                    }else{
-                                        System.out.println("Dinero insuficiente para "+shield4.getItemName());
-                                    }
-                                    shop(1);
-                                        break;
-                                    }
-
-                                case 5:
-                                    shop(1);
-                                    break;
-
+                            Shield shield=ShieldItems.shieldList(ans2);
+                            if(personajes.enoughMoney(personajes.getMoney(),shield.getPrice())){
+                                itemspl1.add(shield);
+                                personajes.setMoney(personajes.getMoney()-shield.getPrice());
+                            }else{
+                                System.out.println("Dinero insuficiente para "+shield.getItemName());
                             }
+                            if (ans2==7){
+                                shop(1);
+                                break;
+                            }
+                            shop(1);
+                            break;
 
                         case 3:
                             Shop.potionShop();
                             int ans3=sc.nextInt();
-                            switch (ans3){
-                                case 1:
-                                    if (contPJ==1){
-                                        Potions hpPotion1=PotionItems.createHPpotion1();
-                                        if (personajes.enoughMoney(personajes.getMoney(),hpPotion1.getPrice())){
-                                            itemspl1.add(hpPotion1);
-                                            personajes.setMoney(personajes.getMoney()-hpPotion1.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+hpPotion1.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 2:
-                                    if (contPJ==1){
-                                        Potions hpPotion2=PotionItems.createHPpotion2();
-                                        if (personajes.enoughMoney(personajes.getMoney(),hpPotion2.getPrice())){
-                                            itemspl1.add(hpPotion2);
-                                            personajes.setMoney(personajes.getMoney()-hpPotion2.getPrice());
-                                        }else {
-                                            System.out.println("Dinero insuficiente para "+hpPotion2.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 3:
-                                    if (contPJ==1){
-                                        Potions mpPotion1=PotionItems.createMPpotion1();
-                                        if (personajes.enoughMoney(personajes.getMoney(),mpPotion1.getPrice())){
-                                            itemspl1.add(mpPotion1);
-                                            personajes.setMoney(personajes.getMoney()-mpPotion1.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+mpPotion1.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-
-                                case 4:
-                                    if (contPJ==1){
-                                        Potions mppotion2=PotionItems.createMPpotion2();
-                                        if (personajes.enoughMoney(personajes.getMoney(),mppotion2.getPrice())){
-                                            itemspl1.add(mppotion2);
-                                            personajes.setMoney(personajes.getMoney()-mppotion2.getPrice());
-                                        }else{
-                                            System.out.println("Dinero insuficiente para "+mppotion2.getItemName());
-                                        }
-                                        shop(1);
-                                        break;
-                                    }
-
-                                case 5:
-                                    shop(1);
-                                    break;
+                            Potions potion=PotionItems.potionsList(ans3);
+                            if (personajes.enoughMoney(personajes.getMoney(),potion.getPrice())){
+                                itemspl1.add(potion);
+                                personajes.setMoney(personajes.getMoney()-potion.getPrice());
+                            }else{
+                                System.out.println("Dinero insuficiente para "+potion.getItemName());
                             }
+                            if (ans3==5){
+                                shop(1);
+                                break;
+                            }
+                            shop(1);
+                            break;
+
                         case 4:{
                             break;
                         }
@@ -355,6 +219,7 @@ public class Main{
                 contrincantes.setVida(contrincantes.getVida()-ataqueRecibido+proteccionArmadura);
                 System.out.println("Mana: "+contrincantes.getMana());
                 System.out.println("Armadura: "+contrincantes.getArmadura());
+                System.out.println("Dinero: "+contrincantes.getMoney());
                 System.out.println("_________________________");
 
                 if (contrincantes.getVida()<=0){

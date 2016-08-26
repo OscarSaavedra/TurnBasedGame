@@ -1,6 +1,9 @@
 package Characters;
 
+import java.util.Scanner;
+
 public abstract class Personajes {
+    protected Scanner sc=new Scanner(System.in);
     protected String nombre;
     protected double vida;
     protected double mana;
@@ -9,6 +12,7 @@ public abstract class Personajes {
     protected double ataque;
     protected String menu;
     protected int money;
+    protected int invCapacity;
 
     public Personajes(double vida,double mana, String nombre,int armadura,String nombreclase){
         this.vida=vida;
@@ -53,6 +57,13 @@ public abstract class Personajes {
     }
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public int getInvCapacity() {
+        return invCapacity;
+    }
+    public void setInvCapacity(int invCapacity) {
+        this.invCapacity = invCapacity;
     }
 
     public boolean enoughMoney(int playerMoney, int itemPrice){

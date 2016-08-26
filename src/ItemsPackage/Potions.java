@@ -4,8 +4,8 @@ import java.util.Comparator;
 
 public class Potions extends Item{
 
-    protected Potions (String itemName, int price, int lifeRestored,int manaRestored){
-        super(itemName,price);
+    protected Potions (String itemName, int price,int size, int lifeRestored,int manaRestored){
+        super(itemName,price,size);
         this.lifeRestored=lifeRestored;
         this.manaRestored=manaRestored;
     }

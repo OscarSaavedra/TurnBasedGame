@@ -10,11 +10,13 @@ public abstract class Item {
     protected int addLife;
     protected int lifeRestored;
     protected int manaRestored;
+    protected int size;
 
 
-    public Item(String itemName,int price) {
+    public Item(String itemName,int price, int size) {
         this.itemName=itemName;
         this.price=price;
+        this.size=size;
     }
 
     public String getItemName() {
@@ -68,13 +70,16 @@ public abstract class Item {
     @Override
     public String toString() {
         if (this instanceof Sword ){
-            return "Espada{"+itemName +"}, Bonus ataque="+addAttack+", Precio="+price;
+            return "Espada{"+itemName +"}, Bonus ataque="+addAttack+", Precio="+price+
+                    ", Espacio en inventario="+size;
         }else if(this instanceof Shield){
             return "Escudo {"+itemName +"}, Bonus defensa="+addDefense+
-                    ", Bonus vida="+addLife+", Precio="+price;
+                    ", Bonus vida="+addLife+", Precio="+price+
+                    ", Espacio en inventario="+size;
         }else if(this instanceof Potions){
             return "Poción{"+itemName+"}, Vida restaurada="+lifeRestored+
-                    ", Maná restaurado="+manaRestored+", Precio="+price;
+                    ", Maná restaurado="+manaRestored+", Precio="+price+
+                    ", Espacio en inventario="+size;
         }
         return "";
     }

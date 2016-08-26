@@ -7,22 +7,22 @@ public class PotionItems {
     private static Potions potion;
 
     public static Potions createHPpotion1(){//ID0
-        potion=new Potions("Poción pequeña de salud",20,0,10);
+        potion=new Potions("Poción pequeña de salud",20,5,0,10);
         return potion;
     }
 
     public static Potions createMPpotion1(){
-        potion=new Potions("Poción pequeña de maná",20,0,10);
+        potion=new Potions("Poción pequeña de maná",20,5,0,10);
         return potion;
     }
 
     public static Potions createHPpotion2(){
-        potion=new Potions("Pocion mediana de salud",40,0,20);
+        potion=new Potions("Pocion mediana de salud",40,10,0,20);
         return potion;
     }
 
     public static Potions createMPpotion2(){
-        potion=new Potions("Poción mediana de salud",40,0,20);
+        potion=new Potions("Poción mediana de salud",40,10,0,20);
         return potion;
     }
 
@@ -36,6 +36,7 @@ public class PotionItems {
         list.add(potion2);
         list.add(potion3);
         list.add(potion4);
+
         return list.get(potionID-1);
     }
 }

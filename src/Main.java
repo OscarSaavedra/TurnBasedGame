@@ -26,8 +26,8 @@ public class Main{
 
     public static void main(String[] args) {
         crearPersonajes();
-        int contPJ=1;
-        shop(contPJ);
+        int playerN=0;
+        shopPL1(playerN);
         resumen();
         battle();
     }
@@ -106,76 +106,95 @@ public class Main{
         }
     }
 
+    private static final List[]seleccionLista=new List[2];
 
-    private static void shop(int contPJ) {
-        for (Personajes personajes:listaPersonajes ) {
+    private static void shopPL1(int playerN) {
+        seleccionLista[0]=itemspl1;
+        seleccionLista[1]=itemspl2;
+
+        boolean bucle=true;
+        while (bucle) {
+            Personajes personajes=listaPersonajes.get(playerN);
             if(personajes.getMoney()>0){
-
             Shop.shopMenuTitle();
             System.out.print(personajes.devolverClase()+" "+personajes.getNombre()+" elige");
             System.out.println(" (dinero actual "+personajes.getMoney());
+                System.out.println(playerN);
             Shop.shopMenuOptions();
 
             int eleccion=sc.nextInt();
-                if (!pjItems.containsKey(personajes)){
+                if (!pjItems.containsKey(personajes)&&playerN==0){
                     pjItems.put(personajes,itemspl1);
+                }else if (!pjItems.containsKey(personajes)&&playerN==1){
+                    pjItems.put(personajes,itemspl2);
                 }
                     switch (eleccion){
                         case 1:
                             Shop.weaponShop();
                             int ans=sc.nextInt();
-                            Sword sword=SwordItems.swordList(ans);
-                            if (personajes.enoughMoney(personajes.getMoney(),sword.getPrice())){
-                                itemspl1.add(sword);
-                                personajes.setMoney(personajes.getMoney()-sword.getPrice());
-                            }else{
-                                System.out.println("Dinero insuficiente para "+sword.getItemName());
-                            }
                             if (ans==7){
-                                shop(1);
+                                shopPL1(playerN);
                                 break;
+                            }else{
+                                Sword sword=SwordItems.swordList(ans);
+                                if (personajes.enoughMoney(personajes.getMoney(),sword.getPrice())){
+                                    seleccionLista[playerN].add(sword);
+                                    personajes.setMoney(personajes.getMoney()-sword.getPrice());
+                                }else{
+                                    System.out.println("Dinero insuficiente para "+sword.getItemName());
+                                }
                             }
-                            shop(1);
+                            shopPL1(playerN);
                             break;
 
                         case 2:
                             Shop.armorShop();
                             int ans2=sc.nextInt();
-                            Shield shield=ShieldItems.shieldList(ans2);
-                            if(personajes.enoughMoney(personajes.getMoney(),shield.getPrice())){
-                                itemspl1.add(shield);
-                                personajes.setMoney(personajes.getMoney()-shield.getPrice());
-                            }else{
-                                System.out.println("Dinero insuficiente para "+shield.getItemName());
-                            }
                             if (ans2==7){
-                                shop(1);
+                                shopPL1(playerN);
                                 break;
+
+                            }else{
+                                Shield shield=ShieldItems.shieldList(ans2);
+                                if(personajes.enoughMoney(personajes.getMoney(),shield.getPrice())){
+                                    seleccionLista[playerN].add(shield);
+                                    personajes.setMoney(personajes.getMoney()-shield.getPrice());
+                                }else{
+                                    System.out.println("Dinero insuficiente para "+shield.getItemName());
+                                }
                             }
-                            shop(1);
+
+                            shopPL1(playerN);
                             break;
 
                         case 3:
                             Shop.potionShop();
                             int ans3=sc.nextInt();
-                            Potions potion=PotionItems.potionsList(ans3);
-                            if (personajes.enoughMoney(personajes.getMoney(),potion.getPrice())){
-                                itemspl1.add(potion);
-                                personajes.setMoney(personajes.getMoney()-potion.getPrice());
-                            }else{
-                                System.out.println("Dinero insuficiente para "+potion.getItemName());
-                            }
                             if (ans3==5){
-                                shop(1);
+                                shopPL1(playerN);
                                 break;
+                            }else{
+                                Potions potion=PotionItems.potionsList(ans3);
+                                if (personajes.enoughMoney(personajes.getMoney(),potion.getPrice())){
+                                    seleccionLista[playerN].add(potion);
+                                    personajes.setMoney(personajes.getMoney()-potion.getPrice());
+                                }else{
+                                    System.out.println("Dinero insuficiente para "+potion.getItemName());
+                                }
                             }
-                            shop(1);
+                            shopPL1(playerN);
                             break;
 
                         case 4:{
                             break;
                         }
                     }
+                    if (playerN==1){
+                        bucle=false;
+                    }
+
+                    playerN++;
+
                 }else{
                     System.out.println("Gastaste tu dinero");
                     break;

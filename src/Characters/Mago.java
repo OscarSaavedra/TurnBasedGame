@@ -10,6 +10,7 @@ public class Mago extends Personajes {
     private int numeroaleatorio=(int)(Math.random()*2+1);
     private double ataque=(valorAtaque*numeroaleatorio);
     private int money=100;
+    private int invCapacity=100;
     public String menu="[1]Atacar\n" +
             "[2]Tu ataque hace un 50% menos de daño pero te cura un 50% (coste 50mp)\n" +
             "[3]Pasar turno (recuperas el 25% de salud)\n"+
@@ -24,6 +25,12 @@ public class Mago extends Personajes {
     }
     public void setMoney(int money) {
         this.money = money;
+    }
+    public int getInvCapacity() {
+        return invCapacity;
+    }
+    public void setInvCapacity(int invCapacity) {
+        this.invCapacity = invCapacity;
     }
     public String devolverMenu(){
         return menu;

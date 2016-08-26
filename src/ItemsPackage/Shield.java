@@ -3,8 +3,8 @@ package ItemsPackage;
 
 public class Shield extends Item {
 
-    protected Shield(String itemName,int price, int addDefense, int addLife) {
-        super(itemName,price);
+    protected Shield(String itemName,int price,int size, int addDefense, int addLife) {
+        super(itemName,price,size);
         this.addDefense=addDefense;
         this.addLife=addLife;
     }

@@ -22,6 +22,7 @@ public class Arquero extends Personajes {
     private int valorAtaque=2;
     private double ataque=(valorAtaque*(int)(Math.random()*15+1));
     private int money=100;
+    private int invCapacity=100;
     private String menu= "[1]Atacar\n" +
             "[2]El próximo ataque que recibas tiene un 50% de fallar\n" +
             "[3]Pasar turno (recuperas el 40% de salud)\n"+
@@ -35,6 +36,12 @@ public class Arquero extends Personajes {
     }
     public void setMoney(int money) {
         this.money = money;
+    }
+    public int getInvCapacity() {
+        return invCapacity;
+    }
+    public void setInvCapacity(int invCapacity) {
+        this.invCapacity = invCapacity;
     }
     public String devolverMenu(){
         return menu;

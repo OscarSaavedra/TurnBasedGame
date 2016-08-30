@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,6 +10,7 @@ import Characters.Guerrero;
 import Characters.Mago;
 import Characters.Personajes;
 import ItemsPackage.*;
+import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -21,6 +23,7 @@ public class Main{
     private static final Multimap<Personajes,List<Item>> pjItems =ArrayListMultimap.create();
     static final List<Item>itemspl1=new ArrayList<>();
     static final List<Item>itemspl2=new ArrayList<>();
+    private static final List[]seleccionLista=new List[2];
     private static final List<Personajes> listaPersonajes = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
 
@@ -29,6 +32,7 @@ public class Main{
         int playerN=0;
         shopPL1(playerN);
         resumen();
+        saveDataInFile();
         battle();
     }
 
@@ -105,9 +109,6 @@ public class Main{
             }
         }
     }
-
-    private static final List[]seleccionLista=new List[2];
-
     private static void shopPL1(int playerN) {
         seleccionLista[0]=itemspl1;
         seleccionLista[1]=itemspl2;
@@ -129,6 +130,7 @@ public class Main{
                     pjItems.put(personajes,itemspl2);
                 }
                     switch (eleccion){
+
                         case 1:
                             Shop.weaponShop();
                             int ans=sc.nextInt();
@@ -163,7 +165,6 @@ public class Main{
                                     System.out.println("Dinero insuficiente para "+shield.getItemName());
                                 }
                             }
-
                             shopPL1(playerN);
                             break;
 
@@ -218,6 +219,57 @@ public class Main{
                 System.out.println("[ITEMS]: "+pjItems.get(personajes));
             }
             System.out.println("-----------------------------");
+        }
+    }
+    private static void saveDataInFile() {
+        System.out.println("Quieres guardar tus personajes? [1].Si---[2].No");
+        int r=sc.nextInt();
+        if (r == 1) {
+            System.out.println("Escribe el directorio en el que deseas guardar los datos");
+            String directorio=sc.next();
+            File fileLocation = new File(directorio);
+            System.out.println("Escribe el nombre del archivo (debe acabar en .txt)");
+            String n=sc.next();
+            File actualFile = new File(fileLocation, n);
+
+            try {
+                if (actualFile.exists()){
+                    System.out.println("El archivo ya existe, su contenido es: ");
+                }else{
+                    FileWriter output = new FileWriter(actualFile);
+                    int i=0;
+                    for (Personajes personajes:listaPersonajes) {
+                        output.write("Nombre del personaje: "+personajes.getNombre());
+                        output.write(String.format("%n")+"-------------------------");
+                        output.write(String.format("%n"));
+                        output.write("Clase: "+personajes.devolverClase());
+                        output.write(String.format("%n"));
+                        output.write("Vida: "+personajes.getVida());
+                        output.write(String.format("%n"));
+                        output.write("Maná: "+personajes.getMana());
+                        output.write(String.format("%n"));
+                        output.write("Armadura: "+personajes.getArmadura());
+                        output.write("Items: "+pjItems.get(personajes));
+                        output.write(String.format("%n"));
+                        output.write(String.format("%n"));
+                    }
+                    output.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Could not create file");
+            }
+
+            FileInputStream fis;
+
+            try {
+                fis = new FileInputStream(actualFile);
+                System.out.println("Tamaño en bytes : "+fis.available());
+                System.out.println("Archivo guardado");
+            } catch (IOException e) {
+                System.out.println("No se puede leer el archivo");
+            }
+        }else {
+            System.out.println("");
         }
     }
     private static void battle() {

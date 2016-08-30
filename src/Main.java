@@ -226,18 +226,17 @@ public class Main{
         int r=sc.nextInt();
         if (r == 1) {
             System.out.println("Escribe el directorio en el que deseas guardar los datos");
-            String directorio=sc.next();
-            File fileLocation = new File(directorio);
+            String directory=sc.next();
+            File fileLocation = new File(directory);
             System.out.println("Escribe el nombre del archivo (debe acabar en .txt)");
             String n=sc.next();
             File actualFile = new File(fileLocation, n);
 
             try {
                 if (actualFile.exists()){
-                    System.out.println("El archivo ya existe, su contenido es: ");
+                    System.out.println("El archivo ya existe");
                 }else{
                     FileWriter output = new FileWriter(actualFile);
-                    int i=0;
                     for (Personajes personajes:listaPersonajes) {
                         output.write("Nombre del personaje: "+personajes.getNombre());
                         output.write(String.format("%n")+"-------------------------");
@@ -264,10 +263,10 @@ public class Main{
             try {
                 fis = new FileInputStream(actualFile);
                 System.out.println("Tamaño en bytes : "+fis.available());
-                System.out.println("Archivo guardado");
             } catch (IOException e) {
                 System.out.println("No se puede leer el archivo");
             }
+            System.out.println("Archivo guardado");
         }else {
             System.out.println("");
         }

@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 
 import Characters.Arquero;
 import Characters.Guerrero;
@@ -27,7 +25,8 @@ public class Main{
     private static final List<Personajes> listaPersonajes = new ArrayList<>();
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args)throws InputMismatchException {
         crearPersonajes();
         int playerN=0;
         shopPL1(playerN);
@@ -37,113 +36,142 @@ public class Main{
     }
 
     private static void crearPersonajes() {
-        double vida,mana;
-        int armadura,i;
+        double vida, mana;
+        int armadura, i;
         String nombre;
         boolean confirmacion = true;
-        System.out.println("Cuantos personajes quieres crear? (introduce 2 para 1vs1)");
-        int cantidadPJ = sc.nextInt();
-        while (confirmacion) {
-            for (i = 1; i <= cantidadPJ; i++) {
-                System.out.println("Selecciona la clase del personaje :");
-                System.out.println("--------------------");
-                System.out.println("[1]Guerrero----[2]Arquero----[3]Mago");
-                int seleccion = sc.nextByte();
-                switch (seleccion){
-                    case 1:
-                        String clase1 = "Guerrero";
-                        System.out.println("Has seleccionado el GUERRERO");
-                        System.out.println("!La vida y el maná solo pueden sumar 175!");
+        try {
+            System.out.println("Cuantos personajes quieres crear? (introduce 2 para 1vs1)");
+            int cantidadPJ=cantidadPJ = sc.nextInt();
 
-                        do{System.out.println("Introduce la vida [de 1 al 175]");
-                            vida = sc.nextDouble();} while(vida<1||vida>175);
-                        do{System.out.println("Introduce el mana [de 1 a "+(175-vida)+"]");
-                            mana = sc.nextDouble();}while (mana<1||mana>175-vida);
-                        System.out.println("Introduce el nombre");
-                        nombre = sc.next();
-                        do{System.out.println("Introduce el valor de armadura [de 1 a 20]");
-                            armadura = sc.nextInt();}while (armadura<1||armadura>20);
-                        Guerrero guerrero = new Guerrero(vida, mana, nombre, armadura, clase1);
-                        listaPersonajes.add(guerrero);
-                        break;
-                    case 2:
-                        String clase2 = "Arquero";
-                        System.out.println("Has seleccionado el ARQUERO");
-                        System.out.println("!La vida y el maná solo pueden sumar 175!");
-                        do{System.out.println("Introduce la vida [de 1 a 175]");
-                            vida = sc.nextDouble();}while (vida<1||vida>175);
-                        do{System.out.println("Introduce el mana [de 1 a "+(175-vida)+"]");
-                            mana = sc.nextDouble();}while (mana<0||mana>175-vida);
-                        System.out.println("Introduce el nombre");
-                        nombre = sc.next();
-                        do{System.out.println("Introduce el valor de armadura [de 1 a 10]");
-                            armadura = sc.nextInt();}while (armadura<1||armadura>10);
-                        Arquero arquero = new Arquero(vida, mana, nombre, armadura, clase2);
-                        listaPersonajes.add(arquero);
-                        break;
-                    case 3:
-                        String clase3 = "Mago";
-                        System.out.println("Has seleccionado el MAGO");
-                        System.out.println("!La vida y el maná solo pueden sumar 175!");
-                        do{System.out.println("Introduce la vida [de 1 a 175]");
-                            vida = sc.nextDouble();}while(vida<1||vida>175);
-                        do{System.out.println("Introduce el mana [de 1 a "+(175-vida)+"]");
-                            mana = sc.nextDouble();}while (mana<1||mana>175-vida);
-                        System.out.println("Introduce el nombre");
-                        nombre = sc.next();
-                        do{System.out.println("Introduce el valor de armadura [de 1 a 10]");
-                            armadura = sc.nextInt();}while (armadura<1||armadura>10);
-                        Mago mago = new Mago(vida, mana, nombre, armadura, clase3);
-                        listaPersonajes.add(mago);
+            while (confirmacion) {
+                for (i = 1; i <= cantidadPJ; i++) {
+                    System.out.println("Selecciona la clase del personaje :");
+                    System.out.println("--------------------");
+                    System.out.println("[1]Guerrero----[2]Arquero----[3]Mago");
+                    int seleccion = sc.nextByte();
+                    switch (seleccion) {
+                        case 1:
+                            String clase1 = "Guerrero";
+                            System.out.println("Has seleccionado el GUERRERO");
+                            System.out.println("!La vida y el maná solo pueden sumar 175!");
+
+                            do {
+                                System.out.println("Introduce la vida [de 1 al 175]");
+                                vida = sc.nextDouble();
+                            } while (vida < 1 || vida > 175);
+                            do {
+                                System.out.println("Introduce el mana [de 1 a " + (175 - vida) + "]");
+                                mana = sc.nextDouble();
+                            } while (mana < 1 || mana > 175 - vida);
+                            System.out.println("Introduce el nombre");
+                            nombre = sc.next();
+                            do {
+                                System.out.println("Introduce el valor de armadura [de 1 a 20]");
+                                armadura = sc.nextInt();
+                            } while (armadura < 1 || armadura > 20);
+                            Guerrero guerrero = new Guerrero(vida, mana, nombre, armadura, clase1);
+                            listaPersonajes.add(guerrero);
+                            break;
+                        case 2:
+                            String clase2 = "Arquero";
+                            System.out.println("Has seleccionado el ARQUERO");
+                            System.out.println("!La vida y el maná solo pueden sumar 175!");
+                            do {
+                                System.out.println("Introduce la vida [de 1 a 175]");
+                                vida = sc.nextDouble();
+                            } while (vida < 1 || vida > 175);
+                            do {
+                                System.out.println("Introduce el mana [de 1 a " + (175 - vida) + "]");
+                                mana = sc.nextDouble();
+                            } while (mana < 0 || mana > 175 - vida);
+                            System.out.println("Introduce el nombre");
+                            nombre = sc.next();
+                            do {
+                                System.out.println("Introduce el valor de armadura [de 1 a 10]");
+                                armadura = sc.nextInt();
+                            } while (armadura < 1 || armadura > 10);
+                            Arquero arquero = new Arquero(vida, mana, nombre, armadura, clase2);
+                            listaPersonajes.add(arquero);
+                            break;
+                        case 3:
+                            String clase3 = "Mago";
+                            System.out.println("Has seleccionado el MAGO");
+                            System.out.println("!La vida y el maná solo pueden sumar 175!");
+                            do {
+                                System.out.println("Introduce la vida [de 1 a 175]");
+                                vida = sc.nextDouble();
+                            } while (vida < 1 || vida > 175);
+                            do {
+                                System.out.println("Introduce el mana [de 1 a " + (175 - vida) + "]");
+                                mana = sc.nextDouble();
+                            } while (mana < 1 || mana > 175 - vida);
+                            System.out.println("Introduce el nombre");
+                            nombre = sc.next();
+                            do {
+                                System.out.println("Introduce el valor de armadura [de 1 a 10]");
+                                armadura = sc.nextInt();
+                            } while (armadura < 1 || armadura > 10);
+                            Mago mago = new Mago(vida, mana, nombre, armadura, clase3);
+                            listaPersonajes.add(mago);
+                    }
+                }
+
+                System.out.println("¿Quieres crear mas personajes? Si--No");
+                String confString = sc.next();
+                if (confString.equals("no")) {
+                    confirmacion = false;
+                } else {
+                    if (confString.equals("si")) {
+                        confirmacion = true;
+                    }
                 }
             }
-
-            System.out.println("¿Quieres crear mas personajes? Si--No" );
-            String confString = sc.next();
-            if (confString.equals("no")) {
-                confirmacion = false;
-            }else {
-                if (confString.equals("si")){
-                    confirmacion=true;
-                }
-            }
+        }catch (InputMismatchException ime){
+            System.out.println("Datos erroneos");
+            sc.next(); //resetea el scanner con los datos anteriores de la cantidad de personajes,
+                // ya que si no el metodo recursivo y el catch entran en bucle.
+            crearPersonajes();
         }
     }
     private static void shopPL1(int playerN) {
-        seleccionLista[0]=itemspl1;
-        seleccionLista[1]=itemspl2;
+        seleccionLista[0] = itemspl1;
+        seleccionLista[1] = itemspl2;
 
-        boolean bucle=true;
-        while (bucle) {
-            Personajes personajes=listaPersonajes.get(playerN);
-            if(personajes.getMoney()>0){
-            Shop.shopMenuTitle();
-            System.out.print(personajes.devolverClase()+" "+personajes.getNombre()+" elige");
-            System.out.println(" (dinero actual "+personajes.getMoney());
-                System.out.println(playerN);
-            Shop.shopMenuOptions();
+        boolean bucle = true;
 
-            int eleccion=sc.nextInt();
-                if (!pjItems.containsKey(personajes)&&playerN==0){
-                    pjItems.put(personajes,itemspl1);
-                }else if (!pjItems.containsKey(personajes)&&playerN==1){
-                    pjItems.put(personajes,itemspl2);
-                }
-                    switch (eleccion){
+        try {
+
+            while (bucle) {
+                Personajes personajes = listaPersonajes.get(playerN);
+                if (personajes.getMoney() > 0) {
+                    Shop.shopMenuTitle();
+                    System.out.print(personajes.devolverClase() + " " + personajes.getNombre() + " elige");
+                    System.out.println(" (dinero actual " + personajes.getMoney());
+                    System.out.println(playerN);
+                    Shop.shopMenuOptions();
+
+                    int eleccion = sc.nextInt();
+                    if (!pjItems.containsKey(personajes) && playerN == 0) {
+                        pjItems.put(personajes, itemspl1);
+                    } else if (!pjItems.containsKey(personajes) && playerN == 1) {
+                        pjItems.put(personajes, itemspl2);
+                    }
+                    switch (eleccion) {
 
                         case 1:
                             Shop.weaponShop();
-                            int ans=sc.nextInt();
-                            if (ans==7){
+                            int ans = sc.nextInt();
+                            if (ans == 7) {
                                 shopPL1(playerN);
                                 break;
-                            }else{
-                                Sword sword=SwordItems.swordList(ans);
-                                if (personajes.enoughMoney(personajes.getMoney(),sword.getPrice())){
+                            } else {
+                                Sword sword = SwordItems.swordList(ans);
+                                if (personajes.enoughMoney(personajes.getMoney(), sword.getPrice())) {
                                     seleccionLista[playerN].add(sword);
-                                    personajes.setMoney(personajes.getMoney()-sword.getPrice());
-                                }else{
-                                    System.out.println("Dinero insuficiente para "+sword.getItemName());
+                                    personajes.setMoney(personajes.getMoney() - sword.getPrice());
+                                } else {
+                                    System.out.println("Dinero insuficiente para " + sword.getItemName());
                                 }
                             }
                             shopPL1(playerN);
@@ -151,18 +179,18 @@ public class Main{
 
                         case 2:
                             Shop.armorShop();
-                            int ans2=sc.nextInt();
-                            if (ans2==7){
+                            int ans2 = sc.nextInt();
+                            if (ans2 == 7) {
                                 shopPL1(playerN);
                                 break;
 
-                            }else{
-                                Shield shield=ShieldItems.shieldList(ans2);
-                                if(personajes.enoughMoney(personajes.getMoney(),shield.getPrice())){
+                            } else {
+                                Shield shield = ShieldItems.shieldList(ans2);
+                                if (personajes.enoughMoney(personajes.getMoney(), shield.getPrice())) {
                                     seleccionLista[playerN].add(shield);
-                                    personajes.setMoney(personajes.getMoney()-shield.getPrice());
-                                }else{
-                                    System.out.println("Dinero insuficiente para "+shield.getItemName());
+                                    personajes.setMoney(personajes.getMoney() - shield.getPrice());
+                                } else {
+                                    System.out.println("Dinero insuficiente para " + shield.getItemName());
                                 }
                             }
                             shopPL1(playerN);
@@ -170,37 +198,43 @@ public class Main{
 
                         case 3:
                             Shop.potionShop();
-                            int ans3=sc.nextInt();
-                            if (ans3==5){
+                            int ans3 = sc.nextInt();
+                            if (ans3 == 5) {
                                 shopPL1(playerN);
                                 break;
-                            }else{
-                                Potions potion=PotionItems.potionsList(ans3);
-                                if (personajes.enoughMoney(personajes.getMoney(),potion.getPrice())){
+                            } else {
+                                Potions potion = PotionItems.potionsList(ans3);
+                                if (personajes.enoughMoney(personajes.getMoney(), potion.getPrice())) {
                                     seleccionLista[playerN].add(potion);
-                                    personajes.setMoney(personajes.getMoney()-potion.getPrice());
-                                }else{
-                                    System.out.println("Dinero insuficiente para "+potion.getItemName());
+                                    personajes.setMoney(personajes.getMoney() - potion.getPrice());
+                                } else {
+                                    System.out.println("Dinero insuficiente para " + potion.getItemName());
                                 }
                             }
                             shopPL1(playerN);
                             break;
 
-                        case 4:{
+                        case 4: {
                             break;
                         }
                     }
-                    if (playerN==1){
-                        bucle=false;
+                    if (playerN == 1) {
+                        bucle = false;
                     }
-
-                    playerN++;
-
-                }else{
+                    if (listaPersonajes.size() > 1) { //soluciona el IndexOutOfBounds exception al jugar con 1
+                        //solo un player
+                        playerN++;
+                    }
+                } else {
                     System.out.println("Gastaste tu dinero");
                     break;
                 }
 
+            }
+        }catch (InputMismatchException ime){
+            System.out.println("Datos erroneos");
+            sc.next();
+            shopPL1(playerN);
         }
     }
     private static void resumen() {
@@ -223,15 +257,22 @@ public class Main{
     }
     private static void saveDataInFile() {
         System.out.println("Quieres guardar tus personajes? [1].Si---[2].No");
-        int r=sc.nextInt();
-        if (r == 1) {
+        String r=sc.next();
+        if (r.equals("1")|r.equals("si")|r.equals("si")) {
             System.out.println("Escribe el directorio en el que deseas guardar los datos");
+            System.out.println("Si escribes defecto, creará una carpeta en el escritorio ");
             String directory=sc.next();
-            File fileLocation = new File(directory);
+            File fileLocation;
+            if (directory.equals("defecto")){
+                fileLocation=new File("C:\\Users\\"+System.getProperty("user.name")+"\\Desktop\\TBgame\\Characters");
+                fileLocation.mkdirs();
+            }else{
+                fileLocation= new File(directory);
+            }
+
             System.out.println("Escribe el nombre del archivo (debe acabar en .txt)");
             String n=sc.next();
             File actualFile = new File(fileLocation, n);
-
             if (actualFile.exists()){
                 System.out.println("El archivo ya existe");
             }else
@@ -299,7 +340,6 @@ public class Main{
                     bucle=false;
                     System.exit(0);
                 }
-
                 System.out.println(contrincantes.devolverMenu());
                 int eleccion = sc.nextInt();
 

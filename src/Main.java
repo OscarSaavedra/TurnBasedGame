@@ -232,39 +232,38 @@ public class Main{
             String n=sc.next();
             File actualFile = new File(fileLocation, n);
 
-            try {
-                if (actualFile.exists()){
-                    System.out.println("El archivo ya existe");
-                }else{
-                    FileWriter output = new FileWriter(actualFile);
-                    for (Personajes personajes:listaPersonajes) {
+            if (actualFile.exists()){
+                System.out.println("El archivo ya existe");
+            }else
+                {
+                    try(FileWriter output = new FileWriter(actualFile)) { //nuevo formato de try en java 7, así
+                        //no necesito cerrar el filewriter, ya que se cierra solo
+                        String sl=(String.format("%n"));
+                        for (Personajes personajes:listaPersonajes) {
                         output.write("Nombre del personaje: "+personajes.getNombre());
-                        output.write(String.format("%n")+"-------------------------");
-                        output.write(String.format("%n"));
-                        output.write("Clase: "+personajes.devolverClase());
-                        output.write(String.format("%n"));
-                        output.write("Vida: "+personajes.getVida());
-                        output.write(String.format("%n"));
-                        output.write("Maná: "+personajes.getMana());
-                        output.write(String.format("%n"));
-                        output.write("Armadura: "+personajes.getArmadura());
-                        output.write("Items: "+pjItems.get(personajes));
-                        output.write(String.format("%n"));
-                        output.write(String.format("%n"));
+                        output.write(sl+"-------------------------");
+                        output.write(sl);
+                        output.write("|"+"Clase: "+personajes.devolverClase()+"|");
+                        output.write(sl);
+                        output.write("|"+"Vida: "+personajes.getVida()+"|");
+                        output.write(sl);
+                        output.write("|"+"Maná: "+personajes.getMana()+"|");
+                        output.write(sl);
+                        output.write("|"+"Armadura: "+personajes.getArmadura()+"|");
+                        output.write(sl);
+                        output.write("|"+"Items: "+pjItems.get(personajes));
+                        output.write(sl);
+                        output.write(sl);
                     }
-                    output.close();
+                }catch (IOException e) {
+                        System.out.println("No se ha podido crear el archivo");
                 }
-            } catch (Exception e) {
-                System.out.println("Could not create file");
             }
 
-            FileInputStream fis;
-
-            try {
-                fis = new FileInputStream(actualFile);
+            try (FileInputStream fis=new FileInputStream(actualFile)){ //lo mismo de arriba
                 System.out.println("Tamaño en bytes : "+fis.available());
             } catch (IOException e) {
-                System.out.println("No se puede leer el archivo");
+                System.out.println("Error: "+e);
             }
             System.out.println("Archivo guardado");
         }else {
